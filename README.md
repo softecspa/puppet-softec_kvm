@@ -26,7 +26,7 @@ on Dom0:
 
 on guests:
 
-    include softec_kvm::guests
+    include softec_kvm::guest
 
 
 ###Setup Requirements
