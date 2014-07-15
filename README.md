@@ -13,7 +13,7 @@ wrapper of puppetlabs-kvm module with some customization.
 ##Module Description
 this module install qemu-kvm through puppetlabs-vm module. In addiction it install:
 
-* ubuntu-virt-server
+ * ubuntu-virt-server
  * virtinst
  * vlan
 
@@ -21,9 +21,11 @@ Module also add the define softec\_kvm::guest to use on guest machines. It fix c
 
 ##Setup
 on Dom0:
+
     include softec_kvm
 
-on guests
+on guests:
+
     include softec_kvm::guests
 
 
