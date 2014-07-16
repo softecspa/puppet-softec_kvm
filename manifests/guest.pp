@@ -14,7 +14,7 @@ class softec_kvm::guest (
         mode    => 644,
         owner   => 'root',
         group   => 'root',
-        source  => 'puppet:///modules/kvm/etc/ttyS0.conf',
+        source  => 'puppet:///modules/softec_kvm/etc/ttyS0.conf',
       }
 
       file_line {'start-ttyS0':
@@ -28,7 +28,7 @@ class softec_kvm::guest (
         mode    => 644,
         owner   => 'root',
         group   => 'root',
-        source  => 'puppet:///modules/kvm/etc/ttyS0.conf',
+        source  => 'puppet:///modules/softec_kvm/etc/ttyS0.conf',
       }
     }
   }
