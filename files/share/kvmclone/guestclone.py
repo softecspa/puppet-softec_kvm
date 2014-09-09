@@ -43,7 +43,7 @@ def default_configfile():
     file_realpath = os.path.realpath(__file__)
     config_path = os.path.join(
         os.path.dirname(os.path.abspath(file_realpath)), 'conf')
-    file_name = os.path.splitext(__file__)[0]
+    file_name = os.path.splitext(os.path.split(__file__)[1])[0]
     config_name = '{}.{}'.format(file_name, 'conf')
     config_file = os.path.join(config_path, config_name)
 
