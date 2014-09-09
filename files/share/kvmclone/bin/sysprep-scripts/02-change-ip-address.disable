@@ -1,0 +1,49 @@
+#!/bin/bash
+
+set -x
+
+################################################
+# Lorenzo Cocchi <lorenzo.cocchi@softecspa.it> #
+# imposta l'IP in base ad una lista di         #
+#  indirizzi presa da un file di testo         #
+################################################
+
+SELF=$(basename $0)
+# deve essere un PATH assoluto!
+LIST_IP_ADDRESS="/home/fuffax/kvmclone/bin/sysprep-scripts/list_ip_address.txt"
+
+warn() {
+    local msg="$1"
+    echo "${msg}"
+}
+
+die() {
+    local msg="$1"
+    local e=${2-1}
+    echo "${msg}" >&2
+    exit ${e}
+}
+
+change_ip() {
+    local ip_address=$1
+    local interface_file=${2:-'etc/network/interfaces'}
+    local fn_name='change_ip'
+
+    [ $# -eq 0 ]  && \
+        { echo "${SELF}: error: ${fn_name}() require IP-address"; exit 1; }
+
+    sed -i.bak -r "s/(^\s+address\s+)(.+)/\1${ip_address}/" \
+        ${interface_file}
+}
+
+[ -s "${LIST_IP_ADDRESS}" ] || \
+    die "${SELF}: error: ${LIST_IP_ADDRESS} not found or with size zero"
+
+IP_ADDRESS="$(head -n1 ${LIST_IP_ADDRESS})"
+change_ip ${IP_ADDRESS}
+
+if [ $? -eq 0 ]; then
+    sed -i.bak '1d' ${LIST_IP_ADDRESS}
+else
+    die "${SELF}: error when changing IP address"
+fi
